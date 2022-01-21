@@ -5,13 +5,16 @@ import controller.ChuyenManHinhController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame implements ActionListener {
     private JPanel jpnMenu, jpnView;
     private JPanel jpnAcc, jpnDiem,jpnHocVien, jpnTrungTam, jpnThongKe;
     private JLabel lbAcc,lbDiem, lbHocVien, lbTrungTam , lbThongKe;
+    private JButton btnSignOut;
     public MainFrame(){
         init();
 
@@ -40,6 +43,7 @@ public class MainFrame extends JFrame{
         jpnHocVien = new JPanel();
         jpnTrungTam = new JPanel();
         jpnThongKe = new JPanel();
+        btnSignOut = new JButton ("Đăng xuất");
 
         lbAcc = new JLabel("QUẢN LÍ HỌC VIÊN");
         lbDiem = new JLabel("Quản lí điểm");
@@ -76,6 +80,11 @@ public class MainFrame extends JFrame{
         jpnTrungTam.setBounds(25,360,350,75);
         jpnThongKe.setBounds(25,460,350,75);
 
+        btnSignOut.setBounds (50,700,300,50);
+        btnSignOut.setFont(new Font("Arial", Font.BOLD, 25));
+        btnSignOut.setBackground(new Color(105, 152, 171));
+        btnSignOut.setIcon (new ImageIcon ("images2/signout.png"));
+        btnSignOut.addActionListener (this);
 
         jpnMenu.setBackground(new Color(26, 55, 77));
         jpnAcc.setBackground(new Color(64, 104, 130));
@@ -97,6 +106,7 @@ public class MainFrame extends JFrame{
         jpnMenu.add(jpnDiem); jpnDiem.add(lbDiem, BorderLayout.CENTER);
         jpnMenu.add(jpnTrungTam); jpnTrungTam.add(lbTrungTam, BorderLayout.CENTER);
         jpnMenu.add(jpnThongKe); jpnThongKe.add(lbThongKe, BorderLayout.CENTER);
+        jpnMenu.add (btnSignOut);
 
 
 
@@ -110,4 +120,11 @@ public class MainFrame extends JFrame{
         this.setVisible(true);
     }
 
+    @Override
+    public void actionPerformed (ActionEvent e) {
+        if(e.getSource ()==btnSignOut){
+            new LoginView ();
+            this.dispose ();
+        }
+    }
 }
